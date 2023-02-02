@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+
+RUN mkdir -p db-entry
+
+WORKDIR /db-entry
+
+COPY ./bin/pocketbase ./
+
+EXPOSE 8090
+
+CMD ["./pocketbase","serve", "--http=0.0.0.0:8090"]

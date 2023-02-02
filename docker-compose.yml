@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  pocketbase:
+    build:
+      context: ./
+      dockerfile: Dockerfile.pocketbase
+    volumes:
+    - "pocketbase:/db-entry/pb_data"
+    restart: always
+    ports:
+      - "8090:8090"
+  svelte:
+    build:
+      context: ./
+      dockerfile: Dockerfile.svelte
+    restart: always
+    #map nginx port 80 to 8080 on your machine
+    ports:
+      - "8080:80"
+
+volumes:
+  pocketbase:
