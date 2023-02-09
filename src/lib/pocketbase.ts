@@ -12,12 +12,6 @@ pb.authStore.onChange((auth) => {
   currentUser.set(pb.authStore.model);
 });
 
-export const login: (
-  username: string,
-  password: string
-) => Promise<void> = async (username, password) => {
-  await pb.collection("users").authWithPassword(username, password);
-};
 export const register: (
   name: string,
   age:number,
@@ -36,3 +30,29 @@ export const register: (
   console.log(createdUser)
 //   await login(createdUser.load()
 };
+
+export const addPet = async(name, petTypeID, ownerID) => {
+  const data = {
+    "name": name,
+    "petType": petTypeID,
+    "owner": ownerID
+};
+
+const record = await pb.collection('pets').create(data);
+}
+
+export const getUsers = async() => {
+  // you can also fetch all records at once via getFullList
+const records = await pb.collection('users').getFullList(200 /* batch size */, {
+  sort: 'created',
+});
+return records
+}
+
+export const getPetTypes = async() => {
+//   you can also fetch all records at once via getFullList
+const records = await pb.collection('petType').getFullList(200 /* batch size */, {
+  sort: '-created',
+});
+return records
+}

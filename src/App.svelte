@@ -1,6 +1,7 @@
 <script lang="ts">
   import { prevent_default } from "svelte/internal";
-  import {currentUser, login, register} from "./lib/pocketbase"
+  import {currentUser, register} from "./lib/pocketbase"
+  import AddPetForm from "./lib/component/addPetForm.svelte";
 
   let name: string = "";
   let age: number;
@@ -38,3 +39,4 @@
     <button type="submit">Create User</button>
   </form>
 {/if}
+<AddPetForm/>
