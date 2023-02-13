@@ -3,27 +3,17 @@
     import { onMount, prevent_default } from "svelte/internal";
     import {getUsers, getPetTypes, addPet} from "../pocketbase"
 
-    type UserType = {
-      ID: string
-      name: string
-    }
-    type PetTypeType = {
-      ID: string
-      type: string
-    }
-  
+
     let name: string = "";
     let userID: string = "Select User";
     let petTypeID: string = "Select Pet Type";
 
-    let userIDList: Record[]=
-    [];
+    let userIDList: Record[]=[];
     let petTypeIDList: Record[] =[];
 
     onMount(async () => {
       userIDList = await getUsers()
       petTypeIDList = await getPetTypes()
-      console.log(userIDList)
     })
   
     const clearForm = () => {
@@ -46,7 +36,7 @@
       <select bind:value={userID} on:change={(e) =>{}} >
         {#each userIDList as user}
           <option value={user.id}>
-            {user.id}
+            {user.name}
           </option>
         {/each}
       </select>
